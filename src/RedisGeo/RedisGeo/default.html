@@ -54,66 +54,61 @@
 
 <script>
     var map;
-
     function initMap() {
-        map = new google.maps.Map(document.getElementById('map'),
-        {
+        map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 37.09024, lng: -95.7128917 },
             zoom: 5
         });
         var geocoder = new google.maps.Geocoder();
         var lastMarker, lastRadius;
 
-        google.maps.event.addListener(map,
-            "click",
-            function(e) {
-                geocoder.geocode({ 'location': e.latLng },
-                    function(results, status) {
-                        if (status === google.maps.GeocoderStatus.OK) {
-                            map.setCenter(e.latLng);
+        google.maps.event.addListener(map, "click", function (e) {
+            geocoder.geocode({ 'location': e.latLng }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    map.setCenter(e.latLng);
 
-                            if (lastMarker != null)
-                                lastMarker.setMap(null);
+                    if (lastMarker != null)
+                        lastMarker.setMap(null);
 
-                            var marker = lastMarker = new google.maps.Marker({
-                                map: map,
-                                position: e.latLng
-                            });
-
-                            if (lastRadius != null)
-                                lastRadius.setMap(null);
-
-                            var km = parseInt(document.getElementById("km").value);
-                            var radius = lastRadius = new google.maps.Circle({
-                                strokeColor: "#c3fc49",
-                                strokeOpacity: 0.8,
-                                strokeWeight: 2,
-                                fillColor: "#c3fc49",
-                                fillOpacity: 0.35,
-                                map: map,
-                                center: e.latLng,
-                                radius: km * 1000
-                            });
-                            radius.bindTo('center', marker, 'position');
-
-                            var state = getStateCode(results);
-                            $("#state").html(state);
-                            $("#instructions").hide();
-                            $("#info").show();
-
-                            $.getJSON("/georesults/" + state,
-                                { lat: e.latLng.lat(), lng: e.latLng.lng(), withinKm: km },
-                                function (r) {
-                                    var html = $.map(r, function(x) {
-                                        return "<li>" + x.member + " (" + x.distance.toFixed(2) + "km)</li>";
-                                    }).join('');
-                                    $("#results").html(html);
-                                });
-                        }
+                    var marker = lastMarker = new google.maps.Marker({
+                        map: map,
+                        position: e.latLng
                     });
-            });
 
-        function getStateCode(results) {
+                    if (lastRadius != null)
+                        lastRadius.setMap(null);
+
+                    var km = parseInt($("#km").val());
+                    var radius = lastRadius = new google.maps.Circle({
+                        strokeColor: "#c3fc49",
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: "#c3fc49",
+                        fillOpacity: 0.35,
+                        map: map,
+                        center: e.latLng,
+                        radius: km * 1000
+                    });
+                    radius.bindTo('center', marker, 'position');
+
+                    var state = getStateAbbr(results);
+                    $("#state").html(state);
+                    $("#instructions").hide();
+                    $("#info").show();
+
+                    $.getJSON("/georesults/" + state,
+                        { lat: e.latLng.lat(), lng: e.latLng.lng(), withinKm: km },
+                        function (r) {
+                            var html = $.map(r, function (x) {
+                                return "<li>" + x.member + " (" + x.distance.toFixed(2) + "km)</li>";
+                            }).join('');
+                            $("#results").html(html);
+                        });
+                }
+            });
+        });
+
+        function getStateAbbr(results) {
             for (var i = 0; i < results.length; i++) {
                 for (var j = 0; j < results[i].address_components.length; j++) {
                     var addr = results[i].address_components[j];
