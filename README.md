@@ -36,7 +36,9 @@ To populate Redis with useful GEO data we'll import the
 US cities as well as their useful longitude and latitude coordinates.
 
 The dataset is maintained in a tab-delimited `US.txt` text file which we do a fresh import of using the
-[ServiceStack.Redis](https://github.com/ServiceStack/ServiceStack.Redis) C# Client when your App first starts up:
+[ServiceStack.Redis](https://github.com/ServiceStack/ServiceStack.Redis) C# Client when the 
+[AppHost](https://github.com/ServiceStackApps/redis-geo/blob/master/src/RedisGeo/RedisGeo/AppHost.cs) 
+first starts up:
 
 ```csharp
 public class AppHost : AppHostBase
@@ -116,10 +118,11 @@ public class FindGeoResults : IReturn<List<RedisGeoResult>>
 }
 ```
 
-That's the only DTO our App needs which returns a `List<RedisGeoResult>`. Implementing our Service is then 
-just a matter fulfilling the above contract by delegating our populated Request DTO properties to the
-`IRedisClient.FindGeoResultsInRadius()` API which itself just calls 
-[GEORADIUS](http://redis.io/commands/georadius) and returns the results:
+That's the only DTO our App needs which returns a `List<RedisGeoResult>`. Implementing the 
+[RedisGeoServices](https://github.com/ServiceStackApps/redis-geo/blob/master/src/RedisGeo/RedisGeo.ServiceInterface/RedisGeoServices.cs) 
+is then just a matter fulfilling the above contract by delegating our populated Request DTO properties to the
+`IRedisClient.FindGeoResultsInRadius()` Redis Client API which itself just calls 
+[GEORADIUS](http://redis.io/commands/georadius) and returns its results:
 
 ```csharp
 public class RedisGeoServices : Service
