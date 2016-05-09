@@ -35,8 +35,8 @@ To populate Redis with useful GEO data we'll import the
 [geonames.org postal data](http://download.geonames.org/export/zip/) which provides the zipcodes of all
 US cities as well as their useful longitude and latitude coordinates.
 
-The dataset is maintained in a tab-delimited `US.txt` text file which we do a fresh import of when your 
-App first starts up:
+The dataset is maintained in a tab-delimited `US.txt` text file which we do a fresh import of using the
+[ServiceStack.Redis](https://github.com/ServiceStack/ServiceStack.Redis) C# Client when your App first starts up:
 
 ```csharp
 public class AppHost : AppHostBase
@@ -259,7 +259,7 @@ E.g. we can import Ausrtalian Suburbs instead with:
 ImportCountry(container.Resolve<IRedisClientsManager>(), "AU");
 ```
 
-## ServiceStack.Redis GEO API's
+## [ServiceStack.Redis](https://github.com/ServiceStack/ServiceStack.Redis) GEO APIs
 
 Human friendly and convenient versions of each Redis GEO API is available in 
 [IRedisClient](https://github.com/ServiceStack/ServiceStack/blob/master/src/ServiceStack.Interfaces/Redis/IRedisClient.cs)
