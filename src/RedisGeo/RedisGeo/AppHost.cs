@@ -21,11 +21,11 @@ namespace RedisGeo
         {
             JsConfig.EmitCamelCaseNames = true;
 
-            //Requires v4.0.57 pre-release packages from MyGet: https://github.com/ServiceStack/ServiceStack/wiki/MyGet
+            //Requires GEO commands in v4.0.57 pre-release packages from MyGet: https://github.com/ServiceStack/ServiceStack/wiki/MyGet
             container.Register<IRedisClientsManager>(c => 
                 new RedisManagerPool(AppSettings.Get("RedisHost", defaultValue:"localhost:6379")));
 
-            //ImportCountry(container.Resolve<IRedisClientsManager>(), "US");
+            ImportCountry(container.Resolve<IRedisClientsManager>(), "US");
         }
 
         public static void ImportCountry(IRedisClientsManager redisManager, string countryCode)
