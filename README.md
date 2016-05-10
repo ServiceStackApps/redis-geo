@@ -1,14 +1,17 @@
 # Redis GEO Example App
 
-Redis GEO is a simple example showing how to make use of [Redis 3.2.0 new GEO API](http://antirez.com/news/104):
+Redis GEO is a simple example showing how to make use of [Redis 3.2.0 new GEO capabilities](http://antirez.com/news/104):
 
-![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/livedemos/redis-geo/redisgeo-screenshot.png)
+[![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/livedemos/redis-geo/redisgeo-screenshot.png)](http://redisgeo.servicestack.net/)
 
-If Redis hasn't already cemented itself as the Swiss-Army-Knife server solution, 3.2.0 release has made it 
-even more versatile and enhanced it with new [GEO capabilities](http://redis.io/commands/geoadd).
+> Live Demo: http://redisgeo.servicestack.net
 
-Aiming for the simplest possible useful demonstration, Redis GEO App lets you click on anywhere in the U.S. 
-to find the list of nearest cities within a given radius. 
+If Redis hasn't already cemented itself as the venerable Swiss-Army-Knife component present in 
+[many high-performance server solutions](http://techstacks.io/tech/redis), the latest 3.2.0 release has made 
+it even more versatile and enhanced it with new [GEO powers](http://redis.io/commands/geoadd).
+
+Aiming for the simplest possible useful demonstration of this new functionality, Redis GEO App lets you 
+click on anywhere in the U.S. to find the list of nearest cities within a given radius. 
 
 ## Install Redis 3.2.0
 
@@ -20,8 +23,8 @@ install in your preferred *NIX system with:
     $ cd redis-3.2.0
     $ make
 
-Which will build the `redis-server` binaries that can be run locally or you can optionally install it as a 
-service that's globally available and automatically started on each boot with:
+This will build the `redis-server` binaries that can be run locally. To also install it as a service that's 
+globally available and automatically started on each boot, run:
 
     $ sudo make install
     $ cd utils
@@ -31,7 +34,7 @@ service that's globally available and automatically started on each boot with:
 
 Redis GEO was created with the 
 [ServiceStack ASP.NET Empty](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project)
-project template but as the new GEO API's were just added you'll need to upgrade to use ServiceStack' 
+project template but as the new GEO API's were just added in 3.2.0 you'll need to upgrade to use ServiceStack' 
 [pre-release v4.0.57 NuGet packages on MyGet](https://github.com/ServiceStack/ServiceStack/wiki/MyGet)
 to use the latest version of [ServiceStack.Redis](https://github.com/ServiceStack/ServiceStack.Redis) 
 containing support for Redis's new GEO operations.
@@ -152,7 +155,7 @@ public class RedisGeoServices : Service
 
 The entire client App is implemented in the static
 [default.html](https://github.com/ServiceStackApps/redis-geo/blob/master/src/RedisGeo/RedisGeo/default.html)
-which is just a jQuery App that only consists of the following markup:
+which is just a jQuery App that just consists of the following markup:
 
 ```html
 <div id="sidebar">
@@ -178,9 +181,9 @@ To show our results from our **GEORADIUS** query and a `<div id="map"/>` placeho
 [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/) to render a 
 our interactive map of the US in. 
 
-The JavaScript just listens to every click on the map then uses the `Geocoder` API to find out which state 
-the user clicked on at which point it adds a custom `Marker` and a `Circle` with the radius that's specified 
-in the distance km textbox. 
+The JavaScript below just listens to every click on the map then uses the `Geocoder` API to find out which 
+state the user clicked on at which point it adds a custom `Marker` and a `Circle` with the radius that's 
+specified in the **km** textbox. 
 
 It then calls our `/georesults/{State}` Service with the Lat/Lng of where the user clicked as well as the 
 distance that it should search within, then displays all the cities within that radius in the Sidebar:
@@ -254,8 +257,10 @@ function initMap() {
 ```
 
 The result is a quick demonstration where the user can click on anywhere in the U.S. to return the nearest 
-points of interest. We hope this simple example piques your interest in Redis new GEO features and highlights
-some potential use-cases possible with these new capabilities.
+points of interest. 
+
+We hope this simple example piques your interest in Redis new GEO features and highlights some potential 
+use-cases possible with these new capabilities.
 
 ## Importing different country datasets
 
