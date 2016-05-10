@@ -20,14 +20,14 @@ in your preferred *NIX system with:
     $ cd redis-3.2.0
     $ make
 
-## Create Project and Upgrade to v4.0.57+
+## Create Empty ServiceStack Project and Upgrade to v4.0.57+
 
 Redis GEO was created with the 
 [ServiceStack ASP.NET Empty](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project)
-project template but as the new GEO API's were just added you'll need to upgrade all ServiceStack packages
-to the [pre-release v4.0.57 NuGet packages on MyGet](https://github.com/ServiceStack/ServiceStack/wiki/MyGet).
+project template but as the new GEO API's were just added you'll need to upgrade to use ServiceStack' 
+[pre-release v4.0.57 NuGet packages on MyGet](https://github.com/ServiceStack/ServiceStack/wiki/MyGet).
 
-> This won't be necessary once the next **v4.0.58+** release of ServiceStack is published on NuGet
+> Upgrading won't be necessary once next **v4.0.58+** release of ServiceStack is published
 
 ## Import Geonames dataset
 
@@ -131,7 +131,7 @@ public class RedisGeoServices : Service
     {
         var results = Redis.FindGeoResultsInRadius(request.State, 
             longitude: request.Lng, latitude: request.Lat,
-            radius: request.WithinKm.GetValueOrDefault(10), unit: RedisGeoUnit.Kilometers,
+            radius: request.WithinKm.GetValueOrDefault(20), unit: RedisGeoUnit.Kilometers,
             sortByNearest: true);
 
         return results;
@@ -156,7 +156,7 @@ which is just a jQuery App that only consists of the following markup:
         </div>
 
         <div id="info">
-            Find cities in <b id="state"></b> within <input id="km" type="text" value="10" /> km
+            Find cities in <b id="state"></b> within <input id="km" type="text" value="20" /> km
         </div>
 
         <ol id="results"></ol>
