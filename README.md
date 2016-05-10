@@ -12,22 +12,31 @@ to find the list of nearest cities within a given radius.
 
 ## Install Redis 3.2.0
 
-In order to use the new GEO APIs you'll need the latest stable 3.2.0 release of redis which you can install
-in your preferred *NIX system with:
+In order to use the new GEO operations you'll need the latest stable 3.2.0 release of redis which you can 
+install in your preferred *NIX system with:
 
     $ wget http://download.redis.io/releases/redis-3.2.0.tar.gz
     $ tar xzf redis-3.2.0.tar.gz
     $ cd redis-3.2.0
     $ make
 
+Which will build the `redis-server` binaries that can be run locally or you can optionally install it as a 
+service that's globally available and automatically started on each boot with:
+
+    $ sudo make install
+    $ cd utils
+    $ sudo ./install_server.sh
+
 ## Create Empty ServiceStack Project and Upgrade to v4.0.57+
 
 Redis GEO was created with the 
 [ServiceStack ASP.NET Empty](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project)
 project template but as the new GEO API's were just added you'll need to upgrade to use ServiceStack' 
-[pre-release v4.0.57 NuGet packages on MyGet](https://github.com/ServiceStack/ServiceStack/wiki/MyGet).
+[pre-release v4.0.57 NuGet packages on MyGet](https://github.com/ServiceStack/ServiceStack/wiki/MyGet)
+to use the latest version of [ServiceStack.Redis](https://github.com/ServiceStack/ServiceStack.Redis) 
+containing support for Redis's new GEO operations.
 
-> Upgrading won't be necessary once next **v4.0.58+** release of ServiceStack is published
+> Upgrading packages won't be necessary after next **v4.0.58+** ServiceStack is released
 
 ## Import Geonames dataset
 
