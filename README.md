@@ -30,16 +30,11 @@ globally available and automatically started on each boot, run:
     $ cd utils
     $ sudo ./install_server.sh
 
-## Create Empty ServiceStack Project and Upgrade to v4.0.57+
+## Create Empty ServiceStack Project
 
-Redis GEO was created with the 
+Redis GEO was created from the 
 [ServiceStack ASP.NET Empty](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project)
-project template but as the new GEO API's were just added in 3.2.0 you'll need to upgrade to use ServiceStack' 
-[pre-release v4.0.57 NuGet packages on MyGet](https://github.com/ServiceStack/ServiceStack/wiki/MyGet)
-to use the latest version of [ServiceStack.Redis](https://github.com/ServiceStack/ServiceStack.Redis) 
-containing support for Redis's new GEO operations.
-
-> Upgrading packages won't be necessary after next **v4.0.58+** ServiceStack is released
+project template.
 
 ## Import Geonames dataset
 
