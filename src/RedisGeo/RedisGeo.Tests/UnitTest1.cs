@@ -24,10 +24,7 @@ namespace RedisGeo.Tests
             .Init();
         }
 
-        [TestFixtureTearDown]
-        public void TestFixtureTearDown()
-        {
-            appHost.Dispose();
-        }
+        [OneTimeTearDown]
+        public void TestFixtureTearDown() => appHost.Dispose();
     }
 }
