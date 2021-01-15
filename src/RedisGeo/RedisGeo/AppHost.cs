@@ -19,9 +19,10 @@ namespace RedisGeo
 
         public override void Configure(Container container)
         {
-            JsConfig.EmitCamelCaseNames = true;
+            SetConfig(new HostConfig {
+                UseCamelCase = true,
+            });
 
-            //Requires GEO commands in v4.0.57 pre-release packages from MyGet: https://github.com/ServiceStack/ServiceStack/wiki/MyGet
             container.Register<IRedisClientsManager>(c => 
                 new RedisManagerPool(AppSettings.Get("RedisHost", defaultValue:"localhost:6379")));
 
