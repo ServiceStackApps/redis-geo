@@ -4,7 +4,7 @@ Redis GEO is a simple example showing how to make use of [Redis 3.2.0 new GEO ca
 
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/livedemos/redis-geo/redisgeo-screenshot.png)](http://redisgeo.servicestack.net)
 
-> Live Demo: http://redisgeo.servicestack.net
+> Live Demo: https://redis.netcore.io
 
 If Redis hasn't already cemented itself as the venerable Swiss-Army-Knife component present in 
 [many high-performance server solutions](http://techstacks.io/tech/redis), the latest 3.2.0 release has made 
